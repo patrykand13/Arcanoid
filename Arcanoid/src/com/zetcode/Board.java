@@ -1,7 +1,6 @@
 package com.zetcode;
 
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -33,6 +32,9 @@ public class Board extends JPanel {
     private String level = "";
     private String color = "";
     private int size = 0;
+    public boolean bonus = false;
+    private int time =0;
+    private int paddleWidth = 70;
 
     public Board() {
         initBoard();
@@ -125,8 +127,18 @@ public class Board extends JPanel {
 
         g2d.drawImage(ball.getImage(), ball.getX(), ball.getY(),
                 ball.getImageWidth(), ball.getImageHeight(), this);
-        g2d.drawImage(paddle.getImage(), paddle.getX(), paddle.getY(),
-                paddle.getImageWidth(), paddle.getImageHeight(), this);
+        if(bonus==false) {
+            g2d.drawImage(paddle.getImage(), paddle.getX(), paddle.getY(),
+                    paddle.getImageWidth(), paddle.getImageHeight(), this);
+        }else if(bonus==true&&time<=600){
+            var ii = new ImageIcon("src/resources/bonuspaddle.png");
+            g2d.drawImage(ii.getImage(), paddle.getX(), paddle.getY(),
+                    80, paddle.getImageHeight(), this);
+            time++;
+        }else if(time>600){
+            time =0;
+            bonus=false;
+        }
 
         for (int i = 0; i < size; i++) {
 
@@ -209,17 +221,23 @@ public class Board extends JPanel {
                 stopGame();
             }
         }
-
-        if ((ball.getRect()).intersects(paddle.getRect())) {
-
-            int paddleLPos = (int) paddle.getRect().getMinX();
-            int ballLPos = (int) ball.getRect().getMinX();
-
-            int first = paddleLPos + 8;
-            int second = paddleLPos + 16;
-            int third = paddleLPos + 24;
-            int fourth = paddleLPos + 32;
-
+        int paddleLPosY = (int) paddle.getRect().getMinY();
+        int ballLPosY = (int) ball.getRect().getMinY();
+        int paddleLPos = (int) paddle.getRect().getMinX();
+        int ballLPos = (int) ball.getRect().getMinX();
+        int first = paddleLPos + 8;
+        int second = paddleLPos + 16;
+        int third = paddleLPos + 24;
+        int fourth = paddleLPos + 32;
+        int last = paddleLPos +40;
+        if(bonus==true){
+            first = paddleLPos + 16;
+            second = paddleLPos + 32;
+            third = paddleLPos + 48;
+            fourth = paddleLPos + 64;
+            last = paddleLPos +80;
+        }
+        if(ballLPosY>=paddleLPosY && ballLPos>=paddleLPos && ballLPos<=last){
             if (ballLPos < first) {
 
                 ball.setXDir(-1);
@@ -284,6 +302,9 @@ public class Board extends JPanel {
                     }
 
                     bricks[i].setDestroyed(true);
+                    if(bricks[i].bonusbrick==false){
+                        bonus=true;
+                    }
                 }
             }
         }

@@ -12,36 +12,13 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Patryk
- */
 public class Settings extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Settings
-     */
     String level = "";
     String color = "";
     public Settings() {
         initComponents();
         set();
-        
-        /*
-        switch(level){
-            case "easy": easyRB.isSelected();break;
-            case "medium": mediumRB.isSelected();break;
-            case "hard": hardRB.isSelected();break;
-            default: {
-            easyRB.isSelected();break;
-            }
-        }
-        switch(color){
-            case "blue": blueRB.isSelected();break;
-            case "red": redRB.isSelected();break;
-            case "green": greenRB.isSelected();break;
-        }*/
-        
     }
 
     /**
@@ -149,7 +126,7 @@ public class Settings extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void saveBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBTActionPerformed
+    private void saveBTActionPerformed(java.awt.event.ActionEvent evt) {
         FileWriter myWriter;
         try {
             myWriter = new FileWriter("difficulty.txt");
@@ -181,9 +158,8 @@ public class Settings extends javax.swing.JFrame {
         }
         Game gameFrame = new Game();
         gameFrame.setVisible(true);
-        //close this frame
         this.dispose();
-    }//GEN-LAST:event_saveBTActionPerformed
+    }
 
     public void set(){
         File myObj;
@@ -222,31 +198,6 @@ public class Settings extends javax.swing.JFrame {
         }
     }
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Settings().setVisible(true);
@@ -255,7 +206,6 @@ public class Settings extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton blueRB;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -267,5 +217,4 @@ public class Settings extends javax.swing.JFrame {
     private javax.swing.JRadioButton mediumRB;
     private javax.swing.JRadioButton redRB;
     private javax.swing.JButton saveBT;
-    // End of variables declaration//GEN-END:variables
 }
